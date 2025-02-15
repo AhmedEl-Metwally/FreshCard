@@ -1,1 +1,252 @@
-<p>register works!</p>
+<form [formGroup]="registerForm" (ngSubmit)="register()" class="max-w-md mx-auto p-6 bg-white shadow-lg rounded-lg">
+
+	@if (apiError)
+	{
+	<div class="flex p-4 mb-4 mt-2 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
+		{{apiError}}
+	</div>
+	}
+
+	<div class="relative z-0 w-full mb-5 group">
+
+		@let nameControl = registerForm.get("name");
+
+		<input formControlName="name" type="text" name="floating_name" id="floating_name"
+			class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-ocean-green peer"
+			placeholder="  " required />
+		<label for="floating_name"
+			class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-ocean-green peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+			User Name
+		</label>
+
+		@if (nameControl?.errors && nameControl?.touched )
+		{
+		<div class="flex p-4 mb-4 mt-2 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
+			<div>
+				<ul class="mt-1.5 list-disc list-inside">
+					@if (nameControl?.hasError('required')) {
+					<li>Name is required</li>
+					}
+					@if (nameControl?.hasError('minlength')) {
+					<li>Minimum 3 characters required</li>
+					}
+					@if (nameControl?.hasError('maxlength')) {
+					<li>Maximum 20 characters allowed</li>
+					}
+					@if (nameControl?.hasError('pattern')) {
+					<li>Only letters, spaces and apostrophes are allowed</li>
+					}
+				</ul>
+			</div>
+		</div>
+		}
+	</div>
+
+	<div class="relative z-0 w-full mb-5 group">
+
+		@let emailControl = registerForm.get("email");
+
+		<input formControlName="email" type="email" name="floating_email" id="floating_email"
+			class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-ocean-green peer"
+			placeholder="  " required />
+		<label for="floating_email"
+			class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-ocean-green peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+			Email address
+		</label>
+		@if (emailControl?.errors && emailControl?.touched )
+		{
+		<div class="flex p-4 mb-4 mt-2 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
+			<div>
+				<ul class="mt-1.5 list-disc list-inside">
+					@if (emailControl?.hasError('required')) {
+					<li>Email address is required</li>
+					}
+					@if (emailControl?.hasError('email') || registerForm.get('email')?.hasError('pattern')) {
+					<li>Please enter a valid email (e.g. name&#64;example.com)</li>
+					}
+					@if (emailControl?.hasError('emailExists')) {
+					<li>This email is already registered</li>
+					}
+				</ul>
+			</div>
+		</div>
+		}
+	</div>
+
+	<div class="relative z-0 w-full mb-5 group">
+
+		@let passwordControl = registerForm.get("password");
+
+		<input formControlName="password" type="password" name="floating_password" id="floating_password"
+			class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-ocean-green peer"
+			placeholder="  " required />
+		<label for="floating_password"
+			class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-ocean-green peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+			Password
+		</label>
+		@if (passwordControl?.errors && passwordControl?.touched )
+		{
+		<div class="flex p-4 mb-4 mt-2 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
+			<div>
+				<ul class="mt-1.5 list-disc list-inside">
+					@if (passwordControl?.hasError('required')) {
+					<li>Password is required</li>
+					}
+					@if (passwordControl?.hasError('minlength')) {
+					<li>Minimum 8 characters required</li>
+					}
+					@if (passwordControl?.hasError('pattern')) {
+					<li>Must contain: uppercase, lowercase, number, and special character</li>
+					}
+				</ul>
+			</div>
+		</div>
+		}
+	</div>
+
+	<div class="relative z-0 w-full mb-5 group">
+
+		@let repasswordControl = registerForm.get("rePassword");
+
+		<input formControlName="rePassword" type="password" name="floating_rePassword" id="floating_rePassword"
+			class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-ocean-green peer"
+			placeholder="  " required />
+		<label for="floating_rePassword"
+			class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-ocean-green peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+			Reset Password
+		</label>
+		@if (repasswordControl?.errors && repasswordControl?.touched ||(registerForm.hasError('mismatch')) )
+		{
+		<div class="flex p-4 mb-4 mt-2 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
+			<div>
+				<ul class="mt-1.5 list-disc list-inside">
+					@if (repasswordControl?.hasError('required'))
+					{
+					<li>Confirmation password is required</li>
+					}
+					@if (registerForm.hasError('mismatch'))
+					{
+					<li>Passwords do not match</li>
+					}
+				</ul>
+			</div>
+		</div>
+		}
+	</div>
+
+	<div class="relative z-0 w-full mb-5 group">
+		@let phoneControl = registerForm.get("phone");
+		<input formControlName="phone" type="tel" name="floating_phone" id="floating_phone"
+			class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-ocean-green peer"
+			placeholder="  " required />
+		<label for="floating_phone"
+			class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-ocean-green peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+			Phone
+		</label>
+
+		@if (phoneControl?.errors && phoneControl?.touched )
+		{
+		<div class="flex p-4 mb-4 mt-2 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
+			<div>
+				<ul class="mt-1.5 list-disc list-inside">
+					@if (phoneControl?.hasError('required'))
+					{
+					<li>Phone number is required</li>
+					}
+					@if (phoneControl?.hasError('pattern'))
+					{
+					<li>Invalid phone number format (e.g. +1234567890)</li>
+					}
+
+				</ul>
+			</div>
+		</div>
+		}
+
+	</div>
+
+	<button type="submit"
+		class="bg-ocean-green text-white px-4 py-2 rounded-md hover:bg-ocean-green/90 transition-colors w-full">
+
+		@if (isCallingAPI)
+		{
+		<i class="fa-solid fa-spinner"></i>
+		}
+		@else
+		{
+		Submit
+		}
+
+	</button>
+
+
+
+
+	<!-- Modal toggle -->
+
+
+
+	 <!-- <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"
+		class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+		type="button">
+		Toggle modal
+	</button> 
+
+	<div id="authentication-modal" tabindex="-1" aria-hidden="true"
+		class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+		<div class="relative p-4 w-full max-w-md max-h-full">
+			
+			<div class="relative bg-white rounded-lg shadow-sm">
+		
+				<div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t border-gray-200">
+					<h3 class="text-xl font-semibold text-gray-900">
+						Sign in to our platform
+					</h3>
+					<button type="button"
+						class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center">
+						<svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+							viewBox="0 0 14 14">
+							<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+								d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+						</svg>
+						<span class="sr-only">Close modal</span>
+					</button>
+				</div>
+
+				<div class="p-4 md:p-5">
+					<form class="space-y-4" action="#">
+						<div>
+							<label for="email" class="block mb-2 text-sm font-medium text-gray-900">Your email</label>
+							<input type="email" name="email" id="email"
+								class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+								placeholder="name@company.com" required />
+						</div>
+						<div>
+							<label for="password" class="block mb-2 text-sm font-medium text-gray-900">Your
+								password</label>
+							<input type="password" name="password" id="password" placeholder="••••••••"
+								class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+								required />
+						</div>
+						<div class="flex justify-between">
+							<div class="flex items-start">
+								<div class="flex items-center h-5">
+									<input id="remember" type="checkbox" value=""
+										class="w-4 h-4 border border-gray-300 rounded-sm bg-gray-50 focus:ring-3 focus:ring-blue-300"
+										required />
+								</div>
+								<label for="remember" class="ms-2 text-sm font-medium text-gray-900">Remember me</label>
+							</div>
+							<a href="#" class="text-sm text-blue-700 hover:underline">Lost Password?</a>
+						</div>
+						<button type="submit"
+							class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Login
+							to your account</button>
+						<div class="text-sm font-medium text-gray-500">
+							Not registered? <a href="#" class="text-blue-700 hover:underline">Create account</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div> -->
