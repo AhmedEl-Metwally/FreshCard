@@ -4,6 +4,7 @@ import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validatio
 import { AuthService } from '../../services/auth/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +17,7 @@ export class RegisterComponent implements OnDestroy
 
   apiError!: string
   isCallingAPI: boolean = false
-  subscription:any
+  subscription: Subscription = new Subscription()
 
   registerForm: FormGroup = new FormGroup({
     name: new FormControl('',
@@ -121,8 +122,7 @@ export class RegisterComponent implements OnDestroy
     {
       this.apiError = ''
 
-      // if (!this.isCallingAPI)
-      // {
+
         this.isCallingAPI = true
 
       if (this.subscription) this.subscription.unsubscribe()
@@ -140,7 +140,6 @@ export class RegisterComponent implements OnDestroy
             
           }
         })
-      //  }
     }
   }
 

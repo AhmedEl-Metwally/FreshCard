@@ -11,7 +11,7 @@ export const routes: Routes = [
 		]
 	},
 
-	{path: "", loadComponent: () => import('./core/auth/login/login.component').then(c => c.LoginComponent)},
+	// {path: "", loadComponent: () => import('./core/auth/login/login.component').then(c => c.LoginComponent)},
 
 	{path: "home", loadComponent: () => import('./features/pages/home/home.component').then(c => c.HomeComponent)},
 	{path: "brands", loadComponent: () => import('./features/pages/brands/brands.component').then(c => c.BrandsComponent)},
