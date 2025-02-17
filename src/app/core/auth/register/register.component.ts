@@ -17,7 +17,7 @@ export class RegisterComponent implements OnDestroy
 
   apiError!: string
   isCallingAPI: boolean = false
-  subscription: Subscription = new Subscription()
+  subscription:Subscription = new Subscription()
 
   registerForm: FormGroup = new FormGroup({
     name: new FormControl('',
