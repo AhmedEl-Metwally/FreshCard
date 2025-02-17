@@ -1,0 +1,32 @@
+@if (nameControl?.errors && nameControl?.touched  )
+{
+<div class="flex p-4 mb-4 mt-2 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
+	<div>
+		<ul class="mt-1.5 list-disc list-inside">
+			@if (nameControl?.hasError('required')) {
+			<li> is required</li>
+			}
+			@if (nameControl?.hasError('minlength')) {
+			<li>Minimum 3 characters required</li>
+			}
+			@if (nameControl?.hasError('maxlength')) {
+			<li>Maximum 20 characters allowed</li>
+			}
+			@if (nameControl?.hasError('pattern')) {
+			<li>Only letters, spaces and apostrophes are allowed</li>
+			}
+			@if (nameControl?.hasError('emailExists')) {
+			<li> is  registered</li>
+			}
+			@if (nameControl?.hasError('pattern')) {
+			<li>Must contain: uppercase, lowercase, number, and special character</li>
+			}
+			@if (nameControl?.hasError('pattern'))
+			{
+			<li>Invalid phone number format (e.g. +1234567890)</li>
+			}
+			
+		</ul>
+	</div>
+</div>
+}

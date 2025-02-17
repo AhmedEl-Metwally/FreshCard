@@ -5,10 +5,12 @@ import { AuthService } from '../../services/auth/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { RecentProductsComponent } from "../../../features/pages/home/components/recent-products/recent-products.component";
+import { ErrorMessageComponent } from "../../../shared/components/ui/error-message/error-message.component";
 
 @Component({
   selector: 'app-register',
-  imports: [ReactiveFormsModule ],   //JsonPipe
+  imports: [ReactiveFormsModule, ErrorMessageComponent],   //JsonPipe
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })

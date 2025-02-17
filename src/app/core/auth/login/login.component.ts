@@ -4,10 +4,11 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, Validators, FormControl, AbstractControl, ValidationErrors } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
+import { ErrorMessageComponent } from "../../../shared/components/ui/error-message/error-message.component";
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, ErrorMessageComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })

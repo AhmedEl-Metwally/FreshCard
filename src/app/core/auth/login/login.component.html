@@ -20,80 +20,48 @@
 			class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-ocean-green peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
 			Email address
 		</label>
-		@if (emailControl?.errors && emailControl?.touched )
-		{
-		<div class="flex p-4 mb-4 mt-2 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
-			<div>
-				<ul class="mt-1.5 list-disc list-inside">
-					@if (emailControl?.hasError('required')) {
-					<li>Email address is required</li>
-					}
-					@if (emailControl?.hasError('email') || loginForm.get('email')?.hasError('pattern')) {
-					<li>Please enter a valid email (e.g. name&#64;example.com)</li>
-					}
-					@if (emailControl?.hasError('emailExists')) {
-					<li>This email is already registered</li>
-					}
-				</ul>
-			</div>
-		</div>
-		}
-	</div>
 
-	<div class="relative z-0 w-full mb-5 group">
+		<app-error-message [nameControl]="emailControl"></app-error-message>
 
-		@let passwordControl = loginForm.get("password");
 
-		<input formControlName="password" [type]=" !toggleInput ? 'password' : 'text' " name="floating_password" id="floating_password"
-			class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-ocean-green peer"
-			placeholder="  " required />
-		<label for="floating_password"
-			class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-ocean-green peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-			Password
-		</label>
 
-          <span (click)="togglePassword()" class="absolute top-[30%] right-0 cursor-pointer" >
-			  @if(!toggleInput)
-			  {
+		<div class="relative z-0 w-full mb-5 group">
+
+			@let passwordControl = loginForm.get("password");
+
+			<input formControlName="password" [type]=" !toggleInput ? 'password' : 'text' " name="floating_password"
+				id="floating_password"
+				class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-ocean-green peer"
+				placeholder="  " required />
+			<label for="floating_password"
+				class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-ocean-green peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+				Password
+			</label>
+
+			<span (click)="togglePassword()" class="absolute top-[10%] right-0 cursor-pointer">
+				@if(!toggleInput)
+				{
 				<i class="fa-regular fa-eye-slash"></i>
-			  }@else{
-				 <i class="fa-regular fa-eye"></i>
-			  }
-			 
-		 </span>
+				}@else{
+				<i class="fa-regular fa-eye"></i>
+				}
 
-		@if (passwordControl?.errors && passwordControl?.touched )
-		{
-		<div class="flex p-4 mb-4 mt-2 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
-			<div>
-				<ul class="mt-1.5 list-disc list-inside">
-					@if (passwordControl?.hasError('required')) {
-					<li>Password is required</li>
-					}
-					@if (passwordControl?.hasError('minlength')) {
-					<li>Minimum 8 characters required</li>
-					}
-					@if (passwordControl?.hasError('pattern')) {
-					<li>Must contain: uppercase, lowercase, number, and special character</li>
-					}
-				</ul>
-			</div>
-		</div>
-		}
-	</div>
+			</span>
+
+			<app-error-message [nameControl]="passwordControl"></app-error-message>
 
 
 
-	<button type="submit"
-		class="bg-ocean-green text-white px-4 py-2 rounded-md hover:bg-ocean-green/90 transition-colors w-full">
+			<button type="submit"
+				class="bg-ocean-green text-white px-4 py-2 rounded-md hover:bg-ocean-green/90 transition-colors w-full">
 
-		@if (isCallingAPI)
-		{
-		<i class="fa-solid fa-spinner"></i>
-		}
-		@else
-		{
-		login
-		}
+				@if (isCallingAPI)
+				{
+				<i class="fa-solid fa-spinner"></i>
+				}
+				@else
+				{
+				login
+				}
 
-	</button>
+			</button>

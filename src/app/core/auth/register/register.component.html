@@ -19,27 +19,8 @@
 			User Name
 		</label>
 
-		@if (nameControl?.errors && nameControl?.touched )
-		{
-		<div class="flex p-4 mb-4 mt-2 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
-			<div>
-				<ul class="mt-1.5 list-disc list-inside">
-					@if (nameControl?.hasError('required')) {
-					<li>Name is required</li>
-					}
-					@if (nameControl?.hasError('minlength')) {
-					<li>Minimum 3 characters required</li>
-					}
-					@if (nameControl?.hasError('maxlength')) {
-					<li>Maximum 20 characters allowed</li>
-					}
-					@if (nameControl?.hasError('pattern')) {
-					<li>Only letters, spaces and apostrophes are allowed</li>
-					}
-				</ul>
-			</div>
-		</div>
-		}
+		<app-error-message [nameControl]="nameControl"></app-error-message>
+
 	</div>
 
 	<div class="relative z-0 w-full mb-5 group">
@@ -53,24 +34,8 @@
 			class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-ocean-green peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
 			Email address
 		</label>
-		@if (emailControl?.errors && emailControl?.touched )
-		{
-		<div class="flex p-4 mb-4 mt-2 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
-			<div>
-				<ul class="mt-1.5 list-disc list-inside">
-					@if (emailControl?.hasError('required')) {
-					<li>Email address is required</li>
-					}
-					@if (emailControl?.hasError('email') || registerForm.get('email')?.hasError('pattern')) {
-					<li>Please enter a valid email (e.g. name&#64;example.com)</li>
-					}
-					@if (emailControl?.hasError('emailExists')) {
-					<li>This email is already registered</li>
-					}
-				</ul>
-			</div>
-		</div>
-		}
+
+		<app-error-message [nameControl]="emailControl"></app-error-message>
 	</div>
 
 	<div class="relative z-0 w-full mb-5 group">
@@ -84,24 +49,8 @@
 			class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-ocean-green peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
 			Password
 		</label>
-		@if (passwordControl?.errors && passwordControl?.touched )
-		{
-		<div class="flex p-4 mb-4 mt-2 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
-			<div>
-				<ul class="mt-1.5 list-disc list-inside">
-					@if (passwordControl?.hasError('required')) {
-					<li>Password is required</li>
-					}
-					@if (passwordControl?.hasError('minlength')) {
-					<li>Minimum 8 characters required</li>
-					}
-					@if (passwordControl?.hasError('pattern')) {
-					<li>Must contain: uppercase, lowercase, number, and special character</li>
-					}
-				</ul>
-			</div>
-		</div>
-		}
+
+		<app-error-message [nameControl]="passwordControl"></app-error-message>
 	</div>
 
 	<div class="relative z-0 w-full mb-5 group">
@@ -144,24 +93,7 @@
 			Phone
 		</label>
 
-		@if (phoneControl?.errors && phoneControl?.touched )
-		{
-		<div class="flex p-4 mb-4 mt-2 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
-			<div>
-				<ul class="mt-1.5 list-disc list-inside">
-					@if (phoneControl?.hasError('required'))
-					{
-					<li>Phone number is required</li>
-					}
-					@if (phoneControl?.hasError('pattern'))
-					{
-					<li>Invalid phone number format (e.g. +1234567890)</li>
-					}
-
-				</ul>
-			</div>
-		</div>
-		}
+		<app-error-message [nameControl]="phoneControl"></app-error-message>
 
 	</div>
 
@@ -178,7 +110,3 @@
 		}
 
 	</button>
-
-
-
-
