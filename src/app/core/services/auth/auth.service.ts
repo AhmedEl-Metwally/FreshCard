@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { Inject, inject, Injectable } from '@angular/core';
 import { AuthUser, LoginUser } from '../../interfaces/auth-user';
 import { Observable } from 'rxjs';
+import { api_url } from '../../custom_injections/api_url';
 
 
 @Injectable({
@@ -11,17 +12,20 @@ export class AuthService {
 
   _httpClient = inject(HttpClient)
 
-  constructor() { }
+  constructor( @Inject(api_url) private apiPath:string  ) { }
 
   registerUser(userInfo: AuthUser) : Observable<any>
   {
-    return this._httpClient.post(`https://ecommerce.routemisr.com/api/v1/auth/signup`, userInfo)
+    return this._httpClient.post(this.apiPath + `/auth/signup`, userInfo)
   }
 
   loginUser(userInfo: LoginUser) : Observable<any>
   {
-    return this._httpClient.post(`https://ecommerce.routemisr.com/api/v1/auth/signin`, userInfo)
+    return this._httpClient.post( this.apiPath + `/auth/signin`, userInfo)
   }
 
 
 }
+
+
+
