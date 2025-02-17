@@ -5,10 +5,11 @@ import { ReactiveFormsModule, FormGroup, Validators, FormControl, AbstractContro
 import { HttpErrorResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { ErrorMessageComponent } from "../../../shared/components/ui/error-message/error-message.component";
+import { CustomInputComponent } from "../../../shared/components/ui/custom-input/custom-input.component";
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, ErrorMessageComponent],
+  imports: [ReactiveFormsModule, ErrorMessageComponent, CustomInputComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })

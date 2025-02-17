@@ -7,10 +7,11 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { RecentProductsComponent } from "../../../features/pages/home/components/recent-products/recent-products.component";
 import { ErrorMessageComponent } from "../../../shared/components/ui/error-message/error-message.component";
+import { CustomInputComponent } from "../../../shared/components/ui/custom-input/custom-input.component";
 
 @Component({
   selector: 'app-register',
-  imports: [ReactiveFormsModule, ErrorMessageComponent],   //JsonPipe
+  imports: [ReactiveFormsModule, ErrorMessageComponent, CustomInputComponent],   //JsonPipe
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })

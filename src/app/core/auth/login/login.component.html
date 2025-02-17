@@ -13,29 +13,23 @@
 
 		@let emailControl = loginForm.get("email");
 
-		<input formControlName="email" type="email" name="floating_email" id="floating_email"
-			class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-ocean-green peer"
-			placeholder="  " required />
+		 <app-custom-input formControlName="email"  id="floating_email" [type]="'email'" [placeholder]="'Add Your Email '" ></app-custom-input>
+
 		<label for="floating_email"
 			class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-ocean-green peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-			Email address
 		</label>
 
 		<app-error-message [nameControl]="emailControl"></app-error-message>
-
-
 
 		<div class="relative z-0 w-full mb-5 group">
 
 			@let passwordControl = loginForm.get("password");
 
-			<input formControlName="password" [type]=" !toggleInput ? 'password' : 'text' " name="floating_password"
-				id="floating_password"
-				class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-ocean-green peer"
-				placeholder="  " required />
+			<app-custom-input formControlName="password" id="floating_password" [type]=" !toggleInput ? 'password' : 'text' " [placeholder]="'Add Your password '"></app-custom-input>
+			
 			<label for="floating_password"
 				class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-ocean-green peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-				Password
+			
 			</label>
 
 			<span (click)="togglePassword()" class="absolute top-[10%] right-0 cursor-pointer">
@@ -50,10 +44,8 @@
 
 			<app-error-message [nameControl]="passwordControl"></app-error-message>
 
-
-
 			<button type="submit"
-				class="bg-ocean-green text-white px-4 py-2 rounded-md hover:bg-ocean-green/90 transition-colors w-full">
+				class="bg-ocean-green text-white px-4 py-2 mt-6 mb-3 rounded-md hover:bg-ocean-green/90 transition-colors w-full">
 
 				@if (isCallingAPI)
 				{
