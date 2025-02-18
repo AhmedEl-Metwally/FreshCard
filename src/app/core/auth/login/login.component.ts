@@ -60,6 +60,8 @@ export class LoginComponent implements OnInit {
       this.subscription = this._authService.loginUser(this.loginForm.value).subscribe({
         next: (res) => {
           this.isCallingAPI = false;
+          localStorage.setItem("userToken", res.token)
+          this._authService.saveUser()
           this._router.navigate(['/home']);
         },
         error: (err: HttpErrorResponse) => {

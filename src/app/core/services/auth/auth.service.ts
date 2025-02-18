@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Inject, inject, Injectable } from '@angular/core';
+import { afterNextRender, Inject, inject, Injectable } from '@angular/core';
 import { AuthUser, LoginUser } from '../../interfaces/auth-user';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { api_url } from '../../custom_injections/api_url';
+import { jwtDecode } from "jwt-decode";
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -10,9 +12,18 @@ import { api_url } from '../../custom_injections/api_url';
 })
 export class AuthService {
 
-  _httpClient = inject(HttpClient)
+  userDate: BehaviorSubject<any> = new BehaviorSubject('') 
 
-  constructor( @Inject(api_url) private apiPath:string  ) { }
+  _httpClient = inject(HttpClient)
+    _router = inject(Router)
+
+  constructor(@Inject(api_url) private apiPath: string)
+   {
+   
+        afterNextRender(() => {
+          this.isLoggedInUser()
+        })
+   }
 
   registerUser(userInfo: AuthUser) : Observable<any>
   {
@@ -22,6 +33,34 @@ export class AuthService {
   loginUser(userInfo: LoginUser) : Observable<any>
   {
     return this._httpClient.post( this.apiPath + `/auth/signin`, userInfo)
+  }
+
+  saveUser()
+  {
+    if (localStorage.getItem("userToken"))
+    {
+      this.userDate.next(jwtDecode(localStorage.getItem("userToken")!))
+    }
+  }
+
+  logOut()
+  {
+    localStorage.removeItem("userToken")
+    this.userDate.next(null)
+    this._router.navigate(['/auth/login'])
+  }
+
+  isLoggedInUser(): boolean
+  {
+    if (localStorage.getItem("userToken"))
+    {
+      this.userDate.next(jwtDecode(localStorage.getItem("userToken")!))
+      return true
+    }
+    else
+    {
+      return false
+    }
   }
 
 
