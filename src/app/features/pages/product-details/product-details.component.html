@@ -15,7 +15,7 @@
 		</p>
 		<span
 			class="inline-block bg-black text-white text-xs font-medium px-3 py-1 rounded-full uppercase tracking-wide">
-			{{ productDeatials.category.name }}
+			{{ productDeatials?.category?.name }}
 		</span>
 		<div class="flex justify-between items-center">
 			<p class="text-xl font-bold text-green-600">
@@ -33,3 +33,16 @@
 		</button>
 	</div>
 </div>
+
+
+
+<h2 #related class="text-4xl font-bold my-10">Recent Product</h2>
+  @defer (on viewport(related)) 
+  {
+		<div class="grid gap-7 mb-8  md:grid-cols-3 lg:grid-cols-6">
+		@for (product of recentProduct; track $index) {
+		<app-product-item [product]="product"></app-product-item>
+		}
+	</div>
+  }
+

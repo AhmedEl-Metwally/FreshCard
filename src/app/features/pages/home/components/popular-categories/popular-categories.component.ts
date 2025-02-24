@@ -34,11 +34,11 @@ export class PopularCategoriesComponent implements OnInit {
   customOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,
-    touchDrag: true, 
-    pullDrag: true,  
-    dots: true,      
+    touchDrag: true,
+    pullDrag: true,
+    dots: true,
     navSpeed: 700,
-    autoplay: true,  
+    autoplay: true,
     autoplayTimeout: 5000,
     autoplayHoverPause: true,
     responsive: {
