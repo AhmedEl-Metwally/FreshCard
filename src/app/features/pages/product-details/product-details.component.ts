@@ -29,8 +29,7 @@ export class ProductDetailsComponent implements OnInit {
       ({
         next: (params) => {
           const id = params.get('id')
-          if (id)
-          {
+          if (id) {
             this.getDetails(id);
           }
         }
