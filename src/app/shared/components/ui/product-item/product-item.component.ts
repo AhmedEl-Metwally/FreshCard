@@ -1,3 +1,4 @@
+import { RouterLink } from '@angular/router';
 import { Product } from './../../../interfaces/product';
 import { Component, Input } from '@angular/core';
 //import { Component, input } from '@angular/core';
@@ -5,7 +6,7 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'app-product-item',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './product-item.component.html',
   styleUrl: './product-item.component.scss'
 })
