@@ -1,6 +1,6 @@
 import { RouterLink } from '@angular/router';
 import { Product } from './../../../interfaces/product';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 //import { Component, input } from '@angular/core';
 
 @Component({
@@ -12,9 +12,18 @@ import { Component, Input } from '@angular/core';
 })
 export class ProductItemComponent {
 
- @Input() product!: Product;
+  isLoading: boolean = false
+  @Input() product!: Product;
+  @Output() fireAddToCart : EventEmitter<string> = new EventEmitter()
 
 
   //product = input.required<Product>()
+
+  handAddToCart(id:string)
+  {
+    this.isLoading = true
+    this.fireAddToCart.emit(id)
+    this.isLoading = true
+  }
 
 }

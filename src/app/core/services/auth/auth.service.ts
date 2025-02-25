@@ -63,6 +63,15 @@ export class AuthService {
     }
   }
 
+  getToken()
+  {
+    if (localStorage.getItem("userToken"))
+    {
+      return localStorage.getItem("userToken")
+    }
+      return ""
+  }
+
 
 }
 

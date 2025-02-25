@@ -1,7 +1,8 @@
 <div class="grid gap-7 mb-8  md:grid-cols-3 lg:grid-cols-6">
 	
-@for (product of Products; track $index) {
-	<app-product-item  [product]="product" ></app-product-item>
-}
+@for (product of Products; track $index)
+ {
+	<app-product-item  (fireAddToCart)="addToCard($event)" [product]="product" ></app-product-item>
+ }
 </div>
 

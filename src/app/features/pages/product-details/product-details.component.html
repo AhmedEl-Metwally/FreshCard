@@ -24,10 +24,18 @@
 				{{ productDeatials.ratingsAverage }} / 5
 			</p>
 		</div>
-		<button class="absolute bottom-3 left-3 right-3 w-fit mx-auto
-		              bg-ocean-green text-white py-2 px-4 text-sm font-medium rounded-lg
-		              shadow-sm hover:bg-opacity-90 focus:ring-1 focus:ring-ocean-green focus:outline-none">
-			🛒 Add to Cart
+		<button 
+		       (click)="addToCart(productDeatials._id)"
+		       class="absolute bottom-3 left-3 right-3 w-fit mx-auto
+		      bg-ocean-green text-white py-2 px-4 text-sm font-medium rounded-lg
+	            shadow-sm hover:bg-opacity-90 focus:ring-1 focus:ring-ocean-green focus:outline-none">
+				
+				@if (isLoading)
+				 {
+					<i class="fa-solid fa-spinner"></i>
+				 }@else {
+					🛒 Add to Cart
+				 }
 		</button>
 	</div>
 </div>

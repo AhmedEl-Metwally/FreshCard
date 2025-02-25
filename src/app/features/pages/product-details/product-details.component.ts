@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../../shared/services/product/product.service';
 import { Product } from '../../../shared/interfaces/product';
 import { ProductItemComponent } from "../../../shared/components/ui/product-item/product-item.component";
+import { CartService } from '../../../shared/services/cart/cart.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -13,13 +15,17 @@ import { ProductItemComponent } from "../../../shared/components/ui/product-item
 })
 export class ProductDetailsComponent implements OnInit {
 
+  isLoading:boolean = false
   private readonly _activatedRoute = inject(ActivatedRoute)
   private readonly _productService = inject(ProductService)
+  private readonly _cartService = inject(CartService)
+  private readonly _toastrService = inject(ToastrService)
 
   productDeatials: Product = {} as Product
   recentProduct! : Product[]
 
-  ngOnInit(): void {
+  ngOnInit(): void
+  {
       this.getId()
   }
 
@@ -60,5 +66,19 @@ export class ProductDetailsComponent implements OnInit {
     });
   }
 
+  addToCart(id: string)
+  {
+    this.isLoading = true
+    this._cartService.addProductToCard(id).subscribe
+      ({
+        next:(res) => {
+          console.log(res);
+          this.isLoading = false
+          this._toastrService.success(res.message, 'Hii');
+        }
+      })
+  }
+
 
 }
+

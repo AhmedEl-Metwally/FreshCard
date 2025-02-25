@@ -21,7 +21,7 @@ export class CartService {
   {
     return this._httpClient.post(this.apiPath + `/cart`, { productId }, {
       headers: {
-        token: this.token
+        token: JSON.parse( this.token)
       }
     })
   }
@@ -30,7 +30,7 @@ export class CartService {
   {
     return this._httpClient.put(this.apiPath + `/cart ${productId }`,  { count }, {
       headers: {
-        token: this.token
+        token: JSON.parse(this.token)
       }
     })
   }
@@ -38,15 +38,15 @@ export class CartService {
   getCard(): Observable<any> {
     return this._httpClient.get(this.apiPath + `/cart`, {
       headers: {
-        token: this.token
+        token: JSON.parse(this.token)
       }
     })
   }
 
-  RemoveSpecificIItem(productId: string): Observable<any> {
+  removeSpecificIItem(productId: string): Observable<any> {
     return this._httpClient.delete(this.apiPath + `/cart ${productId}`, {
       headers: {
-        token: this.token
+        token: JSON.parse(this.token)
       }
     })
   }
@@ -54,7 +54,7 @@ export class CartService {
   clearCart(): Observable<any> {
     return this._httpClient.delete(this.apiPath + `/cart `, {
       headers: {
-        token: this.token
+        token: JSON.parse(this.token)
       }
     })
   }
