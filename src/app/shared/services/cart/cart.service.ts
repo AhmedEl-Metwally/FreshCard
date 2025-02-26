@@ -26,14 +26,14 @@ export class CartService {
     })
   }
 
-  updateProductquantity(productId: string, count:string): Observable<any>
-  {
-    return this._httpClient.put(this.apiPath + `/cart ${productId }`,  { count }, {
+  updateProductQuantity(productId: string, count: string): Observable<any> {
+    return this._httpClient.put(this.apiPath + `/cart/${productId}`, { count }, {
       headers: {
         token: JSON.parse(this.token)
       }
-    })
+    });
   }
+
 
   getCard(): Observable<any> {
     return this._httpClient.get(this.apiPath + `/cart`, {
@@ -43,13 +43,15 @@ export class CartService {
     })
   }
 
-  removeSpecificIItem(productId: string): Observable<any> {
-    return this._httpClient.delete(this.apiPath + `/cart ${productId}`, {
+  removeSpecificIItem(productId: string): Observable<any>
+  {
+    return this._httpClient.delete(this.apiPath + `/cart/${productId}`, {
       headers: {
         token: JSON.parse(this.token)
       }
-    })
+    });
   }
+
 
   clearCart(): Observable<any> {
     return this._httpClient.delete(this.apiPath + `/cart `, {
