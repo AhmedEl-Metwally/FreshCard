@@ -14,6 +14,6 @@ export class CategoriesService {
   
   getAllCategoreis(): Observable<any>
   {
-    return this._httpClient.get( this.apiPath + `/categories`)
+    return this._httpClient.get( `${this.apiPath}/categories`)
   }
 }

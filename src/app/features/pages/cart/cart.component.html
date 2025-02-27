@@ -91,6 +91,11 @@
 			</tbody>
 		</table>
 	</div>
+
+	<div class="cart__action">
+		<a [routerLink]="['/checkout', cartDetails.cartId]" class="bg-ocean-green rounded-md p-4 text-white inline-block my-6">Contiune</a>
+	</div>
+
 </section>
 }
 @else 

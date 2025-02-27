@@ -10,28 +10,20 @@
 
 
 	<div class="relative z-0 w-full mb-5 group">
-
 		@let emailControl = loginForm.get("email");
-
-		 <app-custom-input formControlName="email"  id="floating_email" [type]="'email'" [placeholder]="'Add Your Email '" ></app-custom-input>
-
+		<app-custom-input formControlName="email" id="floating_email" [type]="'email'"
+			[placeholder]="'Add Your Email '"></app-custom-input>
 		<label for="floating_email"
 			class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-ocean-green peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
 		</label>
-
 		<app-error-message [nameControl]="emailControl"></app-error-message>
-
 		<div class="relative z-0 w-full mb-5 group">
-
 			@let passwordControl = loginForm.get("password");
-
-			<app-custom-input formControlName="password" id="floating_password" [type]=" !toggleInput ? 'password' : 'text' " [placeholder]="'Add Your password '"></app-custom-input>
-			
+			<app-custom-input formControlName="password" id="floating_password"
+				[type]=" !toggleInput ? 'password' : 'text' " [placeholder]="'Add Your password '"></app-custom-input>
 			<label for="floating_password"
 				class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-ocean-green peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-			
 			</label>
-
 			<span (click)="togglePassword()" class="absolute top-[10%] right-0 cursor-pointer">
 				@if(!toggleInput)
 				{
@@ -39,21 +31,20 @@
 				}@else{
 				<i class="fa-regular fa-eye"></i>
 				}
-
 			</span>
-
 			<app-error-message [nameControl]="passwordControl"></app-error-message>
-
-			<button type="submit"
-				class="bg-ocean-green text-white px-4 py-2 mt-6 mb-3 rounded-md hover:bg-ocean-green/90 transition-colors w-full">
-
-				@if (isCallingAPI)
-				{
-				<i class="fa-solid fa-spinner"></i>
-				}
-				@else
-				{
-				login
-				}
-
-			</button>
+			
+		</div>
+	</div>
+		<button type="submit"
+			class="bg-ocean-green text-white px-4 py-2 mt-6 mb-3 rounded-md hover:bg-ocean-green/90 transition-colors w-full">
+			@if (isCallingAPI)
+			{
+			<i class="fa-solid fa-spinner"></i>
+			}
+			@else
+			{
+			login
+			}
+		</button>
+		</form>

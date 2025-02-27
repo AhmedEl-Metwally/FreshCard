@@ -16,14 +16,13 @@ export class ProductService {
 
   getproducts(categoryId?: string): Observable<any>
   {
-    let url = categoryId ? `https://ecommerce.routemisr.com/api/v1/products?category[in]=${categoryId}` :`https://ecommerce.routemisr.com/api/v1/products`
+    let url = categoryId ? `${this.apiPath}/products?category[in]=${categoryId}` : `${this.apiPath}/products`
     return this._httpClient.get(url)
-    // return this._httpClient.get( this.apiPath + `/products`)
   }
 
   getproductById(id: string): Observable<any>
   {
-   return this._httpClient.get( this.apiPath + `/products/${id}`)
+    return this._httpClient.get(`${this.apiPath}/products/${id}`)
   }
 
 }

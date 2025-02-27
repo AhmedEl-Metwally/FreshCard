@@ -1,1 +1,67 @@
-<p>checkout works!</p>
+<form [formGroup]="checkOutForm" class="max-w-lg mx-auto mt-10" (ngSubmit)="completeOrder()">
+	<div class="relative z-0 w-full mb-8 group">
+		@let detailsControl = checkOutForm.get('details');
+		<input formControlName="details" id="floating_details" type="text" name="details" placeholder=" "
+			class="block w-full appearance-none border-0 border-b-2 border-gray-400 bg-transparent focus:border-ocean-green focus:outline-none focus:ring-0 peer text-gray-900" />
+		<label for="floating_details"
+			class="absolute left-0 top-3 text-gray-500 text-sm duration-300 transform scale-100 origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-6 peer-focus:text-ocean-green">
+			User details
+		</label>
+		@if (detailsControl?.errors && detailsControl?.touched) {
+		<div class="mt-2 text-sm text-red-600">
+			<ul class="list-disc list-inside">
+				@if (detailsControl?.getError('required')) {
+				<li>Details is required</li>
+				}
+			</ul>
+		</div>
+		}
+	</div>
+
+	<div class="relative z-0 w-full mb-8 group">
+		@let phoneControl = checkOutForm.get('phone');
+		<input formControlName="phone" id="floating_phone" type="tel" name="phone" placeholder=" "
+			class="block w-full appearance-none border-0 border-b-2 border-gray-400 bg-transparent focus:border-ocean-green focus:outline-none focus:ring-0 peer text-gray-900" />
+		<label for="floating_phone"
+			class="absolute left-0 top-3 text-gray-500 text-sm duration-300 transform scale-100 origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-6 peer-focus:text-ocean-green">
+			User phone
+		</label>
+		@if (phoneControl?.errors && phoneControl?.touched) {
+		<div class="mt-2 text-sm text-red-600">
+			<ul class="list-disc list-inside">
+				@if (phoneControl?.getError('required')) {
+				<li>phone is required</li>
+				}
+				@if (phoneControl?.getError('pattern')) {
+				<li>Invalid phone number</li>
+				}
+			</ul>
+		</div>
+		}
+	</div>
+
+		<div class="relative z-0 w-full mb-8 group">
+			@let cityControl = checkOutForm.get('city');
+			<input formControlName="city" id="floating_city" type="text" name="city" placeholder=" "
+				class="block w-full appearance-none border-0 border-b-2 border-gray-400 bg-transparent focus:border-ocean-green focus:outline-none focus:ring-0 peer text-gray-900" />
+			<label for="floating_phone"
+				class="absolute left-0 top-3 text-gray-500 text-sm duration-300 transform scale-100 origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-6 peer-focus:text-ocean-green">
+				User City
+			</label>
+			@if (cityControl?.errors && cityControl?.touched) {
+			<div class="mt-2 text-sm text-red-600">
+				<ul class="list-disc list-inside">
+					@if (cityControl?.getError('required')) {
+					<li>City is required</li>
+					}
+				</ul>
+			</div>
+			}
+		</div>
+
+		<button type="submit"
+			class="bg-ocean-green text-white px-4 py-2 mt-6 mb-3 rounded-md hover:bg-ocean-green/90 transition-colors w-full">
+			Cash
+		</button>
+
+</form>
