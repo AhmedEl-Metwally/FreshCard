@@ -14,29 +14,77 @@
 				<th scope="col" class="px-6 py-3">
 					Product totalOrderPrice
 				</th>
+				<th scope="col" class="px-6 py-3">
+					product.product.imageCover
+				</th>
+				<th scope="col" class="px-6 py-3">
+					view
+				</th>
 			</tr>
 		</thead>
 		<tbody>
 
-			@for (Order of allOrders; track $index)
-			 {
-				<tr class="bg-white border-b border-gray-200">
+			@for (order of allOrders; track order.id ; let i = $index)
+			{
+			<tr class="bg-white border-b border-gray-200">
 				<th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-					{{Order.id}}
+					{{order?.id}}
 				</th>
 				<td class="px-6 py-4">
-					{{Order.isPaid}}
+					<img [src]="order?.cartItems?.[0]?.product?.imageCover" alt="Product Image"
+						class="w-12 h-12 rounded-lg object-cover">
 				</td>
 				<td class="px-6 py-4">
-					{{Order.paymentMethodType}}
+					{{order?.isPaid}}
 				</td>
 				<td class="px-6 py-4">
-					${{Order.totalOrderPrice}}
+					{{order?.paymentMethodType}}
+				</td>
+				<td class="px-6 py-4">
+					${{order?.totalOrderPrice}}
+				</td>
+				<td class="px-6 py-4">
+					<i (click)="openModel(i)" class="fa-solid fa-eye"></i>
 				</td>
 			</tr>
-			 }
-			
-		
+			}
 		</tbody>
 	</table>
+</div>
+
+
+<div #items id="default-modal" tabindex="-1" aria-hidden="true"
+	class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-30 hidden">
+	<div class="relative p-4 w-full max-w-xl max-h-full">
+		<div class="relative bg-white rounded-lg shadow-lg">
+			<div class="flex items-center justify-between p-4 border-b border-gray-200 rounded-t">
+				<h3 class="text-xl font-semibold text-gray-900">Order Details</h3>
+				<button (click)="closeModal()"
+					class="text-gray-400 hover:text-gray-900 rounded-lg text-sm w-8 h-8 flex items-center justify-center">
+					<svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+						<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+							d="M1 1l6 6m0 0l6 6M7 7l6-6M7 7l-6 6" />
+					</svg>
+				</button>
+			</div>
+
+			<div class="p-4 space-y-4">
+				<div class="flex justify-center mb-4">
+					<img [src]="selectedOrder?.cartItems?.[0]?.product?.imageCover ?? 'assets/default.jpg'"
+						alt="Product Image" class="w-40 h-40 rounded-lg object-cover" />
+				</div>
+				<p><strong>Order ID:</strong> {{ selectedOrder?.id }}</p>
+				<p><strong>Is Paid:</strong> {{ selectedOrder?.isPaid ? 'Yes' : 'No' }}</p>
+				<p><strong>Payment Method:</strong> {{ selectedOrder?.paymentMethodType }}</p>
+				<p><strong>Total Price:</strong> ${{ selectedOrder?.totalOrderPrice }}</p>
+			</div>
+
+			<div class="flex justify-center p-4 border-t border-gray-200 rounded-b">
+				<button (click)="closeModal()" type="button"
+					class="bg-ocean-green text-white hover:opacity-90 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5">
+					Close
+				</button>
+			</div>
+		</div>
+	</div>
 </div>
