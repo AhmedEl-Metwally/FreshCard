@@ -16,7 +16,7 @@ export class CheckoutComponent implements OnInit
   private readonly _orderService = inject(OrderService)
 
   checkOutForm!: FormGroup
-  cardId! : string
+  cartId! : string
 
   ngOnInit()
   {
@@ -26,7 +26,7 @@ export class CheckoutComponent implements OnInit
 
   getCartId()
   {
-    this.cardId = this._activatedRoute.snapshot.params['cardId']
+    this.cartId = this._activatedRoute.snapshot.params['cartId']
   }
 
   initForm()
@@ -41,13 +41,23 @@ export class CheckoutComponent implements OnInit
 
   completeOrder()
   {
-    this._orderService.cashOrder(this.cardId, this.checkOutForm.value).subscribe
+    console.log(this.cartId);
+    
+    this._orderService.onLinePayment(this.cartId, this.checkOutForm.value).subscribe
       ({
-        next: (res) => {
+        next: (res) =>
+        {
           console.log(res);
-          
+          open(res.session.url)
         }
       })
+    // this._orderService.cashOrder(this.cardId, this.checkOutForm.value).subscribe
+    //   ({
+    //     next: (res) => {
+    //       console.log(res);
+          
+    //     }
+    //   })
   }
 
 }

@@ -9,8 +9,8 @@ import { Observable } from 'rxjs';
 export class OrderService {
 
   private readonly _httpClient = inject(HttpClient)
-  token = JSON.stringify(localStorage.getItem("userToken"))
-
+  token = localStorage.getItem("userToken") || '';
+   //token = JSON.stringify(localStorage.getItem("userToken"))
 
   constructor(@Inject(api_url) private apiPath: string) { }
 
@@ -23,19 +23,22 @@ export class OrderService {
 
   getAllOrders() : Observable<any>
   {
-    return this._httpClient.get(this.apiPath + `${this.apiPath}/orders`)
+    return this._httpClient.get( `${this.apiPath}/orders`)
   }
 
   getUserOrders(id:string): Observable<any>
   {
-    return this._httpClient.get(this.apiPath + `${this.apiPath}/orders/${id}`)
+    return this._httpClient.get(`${this.apiPath}/orders/user/${id}`)
   }
 
-  onLinePayment(id: string, shippingAddress: { details: string, phone: string, city: string }): Observable<any>
-  {
-    return this._httpClient.post(`${this.apiPath}/orders/checkout-session/${id}`, { shippingAddress }, {
+  onLinePayment(id: string, shippingAddress: { details: string, phone: string, city: string }): Observable<any> {
+    return this._httpClient.post(`${this.apiPath}/orders/checkout-session/${id}?url=http://localhost:4200`, { shippingAddress }, {
       headers: { token: this.token }
     });
+  }
+
+ 
+
 
   }
 
@@ -49,4 +52,4 @@ export class OrderService {
 
 
 
-}
+
