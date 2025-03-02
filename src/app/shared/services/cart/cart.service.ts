@@ -20,44 +20,44 @@ export class CartService {
   addProductToCard(productId:string): Observable<any>
   {
     return this._httpClient.post( `${this.apiPath}/cart`, { productId }, {
-      headers: {
-        token: JSON.parse( this.token)
-      }
+      // headers: {
+      //   token: JSON.parse( this.token)
+      // }
     })
   }
 
   updateProductQuantity(productId: string, count: string): Observable<any> {
     return this._httpClient.put( `${this.apiPath}/cart/${productId}`, { count }, {
-      headers: {
-        token: JSON.parse(this.token)
-      }
+      // headers: {
+      //   token: JSON.parse(this.token)
+      // }
     });
   }
 
 
   getCard(): Observable<any> {
     return this._httpClient.get(`${this.apiPath}/cart`, {
-      headers: {
-        token: JSON.parse(this.token)
-      }
+      // headers: {
+      //   token: JSON.parse(this.token)
+      // }
     })
   }
 
   removeSpecificIItem(productId: string): Observable<any>
   {
     return this._httpClient.delete( `${this.apiPath}/cart/${productId}`, {
-      headers: {
-        token: JSON.parse(this.token)
-      }
+      // headers: {
+      //   token: JSON.parse(this.token)
+      // }
     });
   }
 
 
   clearCart(): Observable<any> {
     return this._httpClient.delete( `${this.apiPath}/cart `, {
-      headers: {
-        token: JSON.parse(this.token)
-      }
+      // headers: {
+      //   token: JSON.parse(this.token)
+      // }
     })
   }
 
