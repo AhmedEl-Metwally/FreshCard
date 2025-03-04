@@ -2,15 +2,12 @@
 		<a [routerLink]="['/productDetails',product._id]">
 			<img [src]="product.imageCover" class="w-full h-48 object-cover mb-4 rounded-lg transition-transform 
 				duration-300 group-hover:scale-105" alt="{{product.title}} cover image">
-
 			<span class="text-ocean-green font-medium text-sm uppercase block mb-1">
 				{{product.category.name}}
 			</span>
-
 			<h2 class="text-eerie-black text-xl font-semibold mb-3 leading-tight">
 				{{product.title.split(' ').splice(0,2).join(' ')}}
 			</h2>
-
 			<div class="flex justify-between text-onyx text-base mb-4">
 				<p class="font-bold">{{product.price }}</p>
 				<p class="flex items-center">
@@ -33,7 +30,5 @@
 				🛒 Add to Cart
 				}
 			</button>
-
-
 		
 </div>

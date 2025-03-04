@@ -47,24 +47,26 @@ export class CartComponent implements OnInit {
       })
   }
 
-  updateCount(id: string, count: number)
-  {
-    this.isLoading = true
-    if (count < 1) return;
-    let updatedCount = `${count}`;
-    this._cartService.updateProductQuantity(id, updatedCount).subscribe
-      ({
-        next: (res) => {
-          console.log('Response from API:', res);
-          this.cartDetails = res;
-          this.isLoading = false
-          const product = this.cartDetails.data.products.find((p: any) => p.product._id === id);
-          if (product) {
-            product.count = count;
-          } 
-        },
-      });
+
+
+  updateCount(id: string, count: number): void {
+    if (count < 1) return; 
+    console.log('Product ID:', id);
+    console.log('New Count:', count);
+    this._cartService.updateProductQuantity(id, `${count}`).subscribe({
+      next: (res) => {
+        console.log( res);
+        const updatedProduct = this.cartDetails.data.products.find(
+          (p) => p.product._id === id
+        );
+        if (updatedProduct) {
+          updatedProduct.count = count; 
+        }
+      },
+    });
   }
+
+
 
   clearCart()
   {

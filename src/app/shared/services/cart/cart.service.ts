@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { api_url } from '../../../core/custom_injections/api_url';
+import { Cart } from '../../interfaces/cart';
 
 
 
@@ -27,7 +28,7 @@ export class CartService {
   }
 
   updateProductQuantity(productId: string, count: string): Observable<any> {
-    return this._httpClient.put( `${this.apiPath}/cart/${productId}`, { count }, {
+    return this._httpClient.put( `${this.apiPath}/cart/${productId }`, { count }, {
       // headers: {
       //   token: JSON.parse(this.token)
       // }
@@ -36,7 +37,7 @@ export class CartService {
 
 
   getCard(): Observable<any> {
-    return this._httpClient.get(`${this.apiPath}/cart`, {
+    return this._httpClient.get<Cart>(`${this.apiPath}/cart`, {
       // headers: {
       //   token: JSON.parse(this.token)
       // }
