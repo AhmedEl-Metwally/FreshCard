@@ -5,11 +5,12 @@ import { Product } from '../../../shared/interfaces/product';
 import { ProductItemComponent } from "../../../shared/components/ui/product-item/product-item.component";
 import { CartService } from '../../../shared/services/cart/cart.service';
 import { ToastrService } from 'ngx-toastr';
+import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 
 
 @Component({
   selector: 'app-product-details',
-  imports: [ProductItemComponent],
+  imports: [ProductItemComponent, CarouselModule ],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss'
 })
@@ -22,7 +23,8 @@ export class ProductDetailsComponent implements OnInit {
   private readonly _toastrService = inject(ToastrService)
 
   productDeatials: Product = {} as Product
-  recentProduct! : Product[]
+  recentProduct!: Product[]
+  
 
   ngOnInit(): void
   {

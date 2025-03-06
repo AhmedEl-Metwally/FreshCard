@@ -1,8 +1,13 @@
-<div class="grid gap-7 mb-8  md:grid-cols-3 lg:grid-cols-6">
 
-	@for (product of Products; track $index)
-	{
-	<app-product-item (fireAddToCart)="addToCard($event)" [product]="product"></app-product-item>
+
+
+<div class="grid gap-6 mb-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+
+	@for (product of Products; track product._id) {
+	<app-product-item (fireAddToCart)="addToCard($event)" [product]="product"
+		class="transition-transform duration-500 hover:scale-105"></app-product-item>
 	}
+
 </div>
+
 

@@ -1,104 +1,73 @@
-<form [formGroup]="registerForm" (ngSubmit)="register()" class="max-w-md mx-auto p-6 bg-white shadow-lg rounded-lg">
+<form [formGroup]="registerForm" (ngSubmit)="register()" class="max-w-lg mx-auto p-10 bg-white shadow-2xl rounded-3xl">
 
 	@if (apiError)
 	{
-	<div class="flex p-4 mb-4 mt-2 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
+	<div class="flex p-4 mb-6 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
 		{{apiError}}
 	</div>
 	}
 
-	<div class="relative z-0 w-full mb-5 group">
-
+	<div class="relative z-0 w-full mb-8 group">
 		@let nameControl = registerForm.get("name");
-
-		<app-custom-input formControlName="name" id="floating_name" [type]="'text'" [placeholder]="'Add Your Name '"></app-custom-input>
-
-		<label for="floating_name"
-			class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-ocean-green peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-		</label>
-
+		<app-custom-input formControlName="name" id="floating_name" [type]="'text'" [placeholder]="'Full Name'"
+			class="text-lg"></app-custom-input>
 		<app-error-message [nameControl]="nameControl"></app-error-message>
-
 	</div>
 
-	<div class="relative z-0 w-full mb-5 group">
-
+	<div class="relative z-0 w-full mb-8 group">
 		@let emailControl = registerForm.get("email");
-		<app-custom-input formControlName="email" id="floating_email" [type]="'email'" [placeholder]="'Add Your Email '"></app-custom-input>
-
-		<label for="floating_email"
-			class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-ocean-green peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-		</label>
-
+		<app-custom-input formControlName="email" id="floating_email" [type]="'email'" [placeholder]="'Email Address'"
+			class="text-lg"></app-custom-input>
 		<app-error-message [nameControl]="emailControl"></app-error-message>
 	</div>
 
-	<div class="relative z-0 w-full mb-5 group">
-
+	<div class="relative z-0 w-full mb-8 group">
 		@let passwordControl = registerForm.get("password");
-
-		<app-custom-input formControlName="password" id="floating_password" [type]="'password'" [placeholder]="'Add Your Password '"></app-custom-input>
-
-		<label for="floating_password"
-			class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-ocean-green peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-
-		</label>
-
+		<app-custom-input formControlName="password" id="floating_password" [type]="'password'"
+			[placeholder]="'Password'" class="text-lg"></app-custom-input>
 		<app-error-message [nameControl]="passwordControl"></app-error-message>
 	</div>
 
-	<div class="relative z-0 w-full mb-5 group">
-
+	<div class="relative z-0 w-full mb-8 group">
 		@let repasswordControl = registerForm.get("rePassword");
+		<app-custom-input formControlName="rePassword" id="floating_rePassword" [type]="'password'"
+			[placeholder]="'Confirm Password'" class="text-lg"></app-custom-input>
 
-		<app-custom-input formControlName="rePassword"  id="floating_rePassword" [type]="'password'" [placeholder]="'Add Your Reset Password '"></app-custom-input>
-
-		<label for="floating_rePassword"
-			class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-ocean-green peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-
-		</label>
-		@if (repasswordControl?.errors && repasswordControl?.touched ||(registerForm.hasError('mismatch')) )
+		@if (repasswordControl?.errors && repasswordControl?.touched || registerForm.hasError('mismatch'))
 		{
-		<div class="flex p-4 mb-4 mt-2 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
-			<div>
-				<ul class="mt-1.5 list-disc list-inside">
-					@if (repasswordControl?.hasError('required'))
-					{
-					<li>Confirmation password is required</li>
-					}
-					@if (registerForm.hasError('mismatch'))
-					{
-					<li>Passwords do not match</li>
-					}
-				</ul>
-			</div>
+		<div class="flex p-4 mb-6 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
+			<ul class="list-disc list-inside">
+				@if (repasswordControl?.hasError('required'))
+				{
+				<li>Confirmation password is required</li>
+				}
+				@if (registerForm.hasError('mismatch'))
+				{
+				<li>Passwords do not match</li>
+				}
+			</ul>
 		</div>
 		}
 	</div>
 
-	<div class="relative z-0 w-full mb-5 group">
+	<div class="relative z-0 w-full mb-8 group">
 		@let phoneControl = registerForm.get("phone");
-
-			<app-custom-input formControlName="phone" id="floating_phone"[type]="'tel'"	[placeholder]="'Add Your Phone '"></app-custom-input>
-
-		<label for="floating_phone"
-			class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-ocean-green peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-		</label>
-
+		<app-custom-input formControlName="phone" id="floating_phone" [type]="'tel'" [placeholder]="'Phone Number'"
+			class="text-lg"></app-custom-input>
 		<app-error-message [nameControl]="phoneControl"></app-error-message>
-
 	</div>
 
 	<button type="submit"
-		class="bg-ocean-green text-white px-4 py-2 rounded-md hover:bg-ocean-green/90 transition-colors w-full">
-
+		class="bg-ocean-green text-white px-8 py-4 rounded-xl hover:bg-ocean-green/90 transition-colors w-full flex items-center justify-center gap-4 text-xl">
 		@if (isCallingAPI)
 		{
-		<i class="fa-solid fa-spinner"></i>
+		<i class="fa-solid fa-spinner animate-spin"></i>
+		Processing...
 		}
 		@else
 		{
 		Submit
 		}
-
 	</button>
+
+</form>

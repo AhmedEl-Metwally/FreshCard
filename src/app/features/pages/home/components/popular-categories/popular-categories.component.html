@@ -1,53 +1,32 @@
-<div class="mb-16 px-4">
-	<h2 class="text-4xl font-bold mb-8 text-center text-gray-800">
+<div class="mb-16 px-4">	
+<div class="flex justify-center items-center h-[50vh]">
+	<h2 class="text-5xl font-bold tracking-wide 
+             bg-gradient-to-r from-ocean-green to-eerie-black text-transparent bg-clip-text
+             relative inline-block transition-transform duration-300 hover:scale-105">
 		Popular Categories
+		<span
+			class="absolute left-0 bottom-0 w-0 h-1 bg-ocean-green transition-all duration-300 group-hover:w-full"></span>
 	</h2>
-
-
+</div>
 	<owl-carousel-o [options]="customOptions">
 		@for (category of categories; track category._id) {
 		<ng-template carouselSlide [id]="category._id">
-			<div class="carousel-item flex flex-col items-center p-4" role="group" aria-roledescription="slide"
-				[attr.aria-label]="'Slide for ' + category.name">
-				<div class="rounded-full overflow-hidden w-32 h-32 md:w-48 md:h-48
-			border-4 border-white shadow-lg hover:shadow-xl transition-shadow">
-					<img [src]="category.image" class="h-[300px] w-full object-cover"
-						[alt]="category.name + ' category'" [title]="category.name" [title]="category.name"
-						onerror="this.src='fallback-image.jpg'">
+			<div class="carousel-item flex flex-col items-center p-6 group" role="group" aria-roledescription="slide"
+				[attr.aria-label]="'Category: ' + category.name">
+			>
+				<div class="w-48 h-48 border border-gray-300 rounded-lg shadow-md 
+                      hover:shadow-xl transition-shadow duration-300 overflow-hidden">
+					<img [src]="category.image"
+						class="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
+						[alt]="category.name + ' category'" [title]="category.name">
 				</div>
-
-				<h3 class="mt-4 text-lg md:text-xl font-semibold text-gray-800
-						transition-opacity duration-300 group-hover:opacity-90 text-center
-						px-2 py-1 rounded-md">
+			
+				<h3 class="mt-4 text-lg font-medium text-gray-700 text-center 
+                     transition-colors duration-300 group-hover:text-ocean-green">
 					{{ category.name }}
 				</h3>
-
-
 			</div>
 		</ng-template>
 		}
 	</owl-carousel-o>
 </div>
-
-
-
-
-
-
-
-
-
-
-<!-- <owl-carousel-o [options]="customOptions">
-	@for (category of categories; track category._id) {
-	<ng-template carouselSlide [id]="category._id">
-		<div class="carousel-item" role="group" aria-roledescription="slide"
-			[attr.aria-label]="'Slide for ' + category.name">
-			<img [src]="category.image" [alt]="category.name + ' category'" [title]="category.name"
-				class="h-[300px] w-full object-cover" loading="lazy" (error)="handleImageError($event)"
-				[attr.srcset]="getResponsiveSources(category.image)">
-			<h3 class="carousel-caption sr-only md:not-sr-only">{{ category.name }}</h3>
-		</div>
-	</ng-template>
-	}
-</owl-carousel-o> -->
