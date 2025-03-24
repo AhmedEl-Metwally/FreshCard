@@ -73,10 +73,10 @@ export class RegisterComponent implements OnDestroy
 
 
   //passwordMatchValidator
-  private passwordMatchValidator(cotrol: AbstractControl) : ValidationErrors | null
+  private passwordMatchValidator(control: AbstractControl) : ValidationErrors | null
   {
-    const password = cotrol.get("password")?.value
-    const rePassword = cotrol.get("rePassword")?.value
+    const password = control.get("password")?.value
+    const rePassword = control.get("rePassword")?.value
 
     return password == rePassword ? null : { mismatch:true}
   }

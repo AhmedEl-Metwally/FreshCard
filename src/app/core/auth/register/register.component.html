@@ -41,7 +41,7 @@
 				{
 				<li>Confirmation password is required</li>
 				}
-				@if (registerForm.hasError('mismatch'))
+				@else if (registerForm.hasError('mismatch'))
 				{
 				<li>Passwords do not match</li>
 				}
