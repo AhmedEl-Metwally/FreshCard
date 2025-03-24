@@ -10,7 +10,7 @@
           "style": "scss",
           "skipTests":true
         },
-        "@schematics/angular:sevvice": {
+        "@schematics/angular:service": {
           "skipTests":true
         }
       },

@@ -35,10 +35,8 @@ export class RegisterComponent implements OnDestroy
       [
         Validators.required,
         Validators.email,
-        Validators.pattern(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/)
-      ],
-      
-    ),
+        Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|org|net)$/)
+      ]),
       
     password: new FormControl('',
       [

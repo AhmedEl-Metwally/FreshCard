@@ -21,30 +21,30 @@ export class LoginComponent implements OnInit {
   subscription: Subscription = new Subscription()
 
 
-  loginForm!: FormGroup 
+  loginForm!: FormGroup
 
   private _authService = inject(AuthService);
   private _router = inject(Router);
 
 
-   ngOnInit(): void {
-       this.initform()
+  ngOnInit(): void {
+    this.initform()
   }
-  
+
   initform() {
-     this.loginForm = new FormGroup
+    this.loginForm = new FormGroup
       ({
-      email: new FormControl('', [
-        Validators.required,
-        Validators.email,
-        Validators.pattern(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/)
-      ]),
-      password: new FormControl('', [
-        Validators.required,
-        Validators.minLength(8),
-        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/)
-      ]),
-    });
+        email: new FormControl('', [
+          Validators.required,
+          Validators.email,
+          Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|org|net)$/)
+        ]),
+        password: new FormControl('', [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/)
+        ]),
+      });
   }
 
 
@@ -57,14 +57,19 @@ export class LoginComponent implements OnInit {
       this.isCallingAPI = true;
 
       if (this.subscription) this.subscription.unsubscribe();
+
+
       this.subscription = this._authService.loginUser(this.loginForm.value).subscribe({
         next: (res) => {
+
           this.isCallingAPI = false;
           localStorage.setItem("userToken", res.token)
           this._authService.saveUser()
           this._router.navigate(['/home']);
         },
         error: (err: HttpErrorResponse) => {
+          console.log(err);
+
           this.apiError = err.error.message;
           this.isCallingAPI = false;
         },
@@ -76,8 +81,7 @@ export class LoginComponent implements OnInit {
 
 
 
-  togglePassword()
-  {
+  togglePassword() {
     this.toggleInput = !this.toggleInput
   }
 
