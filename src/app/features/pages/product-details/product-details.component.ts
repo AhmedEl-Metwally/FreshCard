@@ -24,6 +24,26 @@ export class ProductDetailsComponent implements OnInit {
 
   productDeatials: Product = {} as Product
   recentProduct!: Product[]
+  productImages: string[] = [];
+  selectedImage: string = '';
+
+
+  thumbOptions: OwlOptions = {
+    loop: false,
+    margin: 10,
+    nav: false,
+    dots: false,
+    responsive: {
+      0: { items: 3 },
+      600: { items: 4 },
+      1000: { items: 5 }
+    }
+  };
+
+  selectImage(img: string) {
+    this.selectedImage = img;
+  }
+
   
 
   ngOnInit(): void
@@ -50,6 +70,11 @@ export class ProductDetailsComponent implements OnInit {
       ({
         next: (res) => {
           this.productDeatials = res.data
+          this.productImages = [
+            res.data.imageCover,
+            ...(res.data.images || [])
+          ];
+          this.selectedImage = this.productImages[0];
           this.getRelatedProducts(this.productDeatials.category._id)
         },
         error: (err) => console.error('Error loading product:', err),
