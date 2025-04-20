@@ -20,7 +20,9 @@ export class RegisterComponent implements OnDestroy
 
   apiError!: string
   isCallingAPI: boolean = false
-  subscription:Subscription = new Subscription()
+  subscription: Subscription = new Subscription()
+  _authService = inject(AuthService)
+  _router = inject(Router)
 
   registerForm: FormGroup = new FormGroup({
     name: new FormControl('',
@@ -68,8 +70,7 @@ export class RegisterComponent implements OnDestroy
     }
   );
 
-  _authService = inject(AuthService)
-  _router = inject(Router)
+  
 
 
   //passwordMatchValidator
